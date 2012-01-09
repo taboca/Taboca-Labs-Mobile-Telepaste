@@ -23,14 +23,23 @@
 	var indo = false;
 	function vai() { 
 		if(!indo) { 
-			vainimate();
 			indo=true;
+			vainimate();
+		} else { 
+			indo=false;
 		} 
 	} 
+
+
 	function vainimate() { 
-		t+=spd;
-		window.scroll(0,parseInt(t));
-		setTimeout("vainimate()",10);
+		if(indo) { 	
+			if(Math.abs(document.body.scrollTop-t)>1) { 
+				t=document.body.scrollTop;
+			} 
+			t+=spd;
+			window.scroll(0,parseInt(t));
+			setTimeout("vainimate()",10);
+		} 
 	}
 	function updateFont(vv) { 
 		document.getElementById("container").style.fontSize=vv+"";	
@@ -43,7 +52,10 @@
 	function updateSpeed(vv) { 
 		spd = parseFloat(vv);
 	} 
-
+	
+	window.onclick = function () { 
+		vai();
+	} 
 
 </script>
 
@@ -58,8 +70,6 @@
 
 #painel { 
 	background-color:gray;
-	position:fixed;
-	width:100%;
 	top:0;
 	margin:0;
 	padding:1em;
@@ -74,22 +84,15 @@
 
 </head>
 
-<body>
-<div id="painel">
+<body id='container'>
 Default Effect: [scroll view] Font: <input id="size" value="45px" onchange="updateFont(this.value)" type="text">
 
 Padding: <input id="size" value="1em" onchange="updatePadding(this.value)" type="text">
 Speed: <input id="size" value=".2" onchange="updateSpeed(this.value)" type="text">
-<button onclick="vai()">Play</button>
 <button onclick="reset()">Reset</button>
 <button onclick="document.location='http://www.taboca.com/p/flow/teleprompt/'">Reload this page</button>
-</div>
 
-<div id="viewport" class="viewport" style="">
-<div id="pagetranslate">
-<div id="pagescale">
-
-<div id="container">
+<textarea id="textvalue" style="width: 100%; background-color: lightyellow; font-size: 100%;" rows="4"></textarea>
 
 <h1>TelePrompter Reader App</h1>
 
@@ -97,22 +100,8 @@ Você tem problemas para  ler artigos na internet? Aquelas letras
 pequenas e/ou distração e/ou sono e/ou propaganda e/ou sei-lá-o-que? 
 Seus problemas acabaram. Seja bem vindo ao Flow -&gt; Teleprompt, um 
 experimento por Taboca Labs. Basta vc fazer Copy and paste de um artigo (
- o texto ) de uma pagina da internet, dentro da caixa abaixo, depois 
-clicar no botão gerar e play. 
-
-
-<p>
-<textarea id="textvalue" style="width: 100%; background-color: lightyellow; font-size: 100%;" rows="4"></textarea>
-
-</p>
-
-
-<button onclick="document.getElementById('container').innerHTML=document.getElementById('textvalue').value;vai();"> Iniciar </button>
-</div>
-</div>
-</div>
+ o texto ) de uma pagina da internet, dentro da caixa acima, depois clicar nessa p´pagina para play ou pause.
 
 
 
-
-</div></body></html>
+</body></html>
