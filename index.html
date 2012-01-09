@@ -1,0 +1,165 @@
+<html>
+<head>
+<title>Gerador de Cartão de Visita - versão 0.2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="image_src" href="http://www.telasocial.com/output/vendor-taboca/logomini.png" />
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+
+<style>
+
+#paper { 
+   width:525px;
+   height:300px;
+   background-color:#aaa;
+   -moz-box-shadow:5px 5px 10px black;
+} 
+
+.icon { 
+   -moz-box-shadow: 0 0 10px white;
+} 
+
+.profile { 
+   background-color:#777; 
+   padding:1em;
+} 
+
+.profile a { 
+   color:lightblue;
+} 
+
+
+html { 
+  color:#fff;
+  font-family:verdana;
+  min-height:100%;
+  background-color:black;
+} 
+
+table td { 
+  font-size:86%;
+} 
+
+#frame { 
+  margin-top:1em;
+	width:525px; 
+	height:500px;
+} 
+
+.toolbar { 
+	margin:1em;
+} 
+
+input { 
+	padding:.2em;
+} 
+
+textarea { 
+	padding:.21em;
+	border:1px solid;
+} 
+
+.panel { 
+	margin-top:1em;
+	border:1px solid black;
+	padding:.5em;
+} 
+
+</style>
+
+<script src='telasocial/engine-telasocial.js'> </script>
+<script src='telasocial/fixup-fonts.js'> </script>
+<script src='telasocial/reflection.js'> </script>
+<script src='telasocial/jquery.js'> </script>
+<script src='telasocial/editorLayer.js'> </script>
+<script src='telasocial/graphics.js'> </script>
+
+<script type="text/javascript" src="https://www.google.com/jsapi">
+</script>
+
+<script type="text/javascript">
+  google.load("webfont", "1");
+</script>
+</head>
+
+<body onload='init()'>
+
+<center>
+<h3 style='color:yellow' >Community Themes for Cards</h3>
+<table cellpadding="10">
+<tr><td colspan="2">
+
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<table>
+<tr>
+<td>Nome:</td>
+<td><input type='text' size="30" id='texttop' style='width:250px;' value="Meu Nome"/>
+</td>
+</tr>
+<tr>
+<td>
+Descrição:</td>
+<td valign="top">
+<textarea id='desc' cols="30" rows="5" style='width:250px'>
+Endereço Rua X 
+Telefone: 1111 2222
+E-mail: meuemail@email.br
+</textarea>
+</td>
+</tr>
+</table>
+</td>
+<td valign="top">
+<input type='button' value='Print data' onclick='generate()' />
+<input type='button' value='Test'  onclick='renderRotation()' />
+<input type='button' value='Get image'  onclick='window.open(document.getElementById("paper").toDataURL());' />
+
+Font size: <input value="48px" name="size" onchange="setSize(this.value);" /> and Font family ( Google Web Fonts Directory ):  
+<select onchange="change(this.selectedIndex)" id="fontlist">
+
+<option>Cabin Condensed</option>
+<option>Love Ya Like A Sister</option><option>Patrick Hand</option><option>Forum</option><option>Stardos Stencil</option><option>Varela</option><option>Hammersmith One</option><option>Redressed</option><option>Lobster Two</option><option>Gravitas One</option><option>Lekton</option><option>Goblin One</option><option>Asset</option><option>Maiden Orange</option><option>Tenor Sans</option><option>Didact Gothic</option><option>Aclonica</option><option>Jura</option><option>Zeyada</option><option>Francois One</option><option>Paytone One</option><option>Monofett</option><option>Holtwood One SC</option><option>Caudex</option><option>Kameron</option><option>Bangers</option><option>Bigshot One</option><option>Ultra</option><option>Special Elite</option><option>Damion</option><option>Playfair Display</option><option>Ruslan Display</option><option>Limelight</option><option>Anonymous Pro</option><option>Sue Ellen Francisco</option><option>Amaranth</option><option>Muli</option><option>Artifika</option><option>Shadows Into Light</option><option>Swanky and Moo Moo</option><option>PT Serif</option><option>Megrim</option><option>Candal</option><option>Lora</option><option>Rokkitt</option><option>Indie Flower</option><option>Over the Rainbow</option><option>Chewy</option><option>Just Me Again Down Here</option><option>News Cycle</option><option>UnifrakturCook</option><option>Puritan</option><option>Sigmar One</option><option>Maven Pro</option><option>League Script</option><option>Nova</option><option>Brawler</option><option>Quattrocento Sans</option><option>Allerta</option><option>Michroma</option><option>Shanti</option><option>Smythe</option><option>Radley</option><option>Anton</option><option>Cabin</option><option>Droid Sans</option><option>Lobster</option><option>Bevan</option><option>Dawning of a New Day</option><option>Allerta Stencil</option><option>Oswald</option><option>Buda</option><option>Open Sans</option><option>Metrophobic</option><option>Irish Grover</option><option>Kreon</option><option>Wallpoet</option><option>EB Garamond</option><option>Vibur</option><option>Just Another Hand</option><option>Carter One</option><option>Allan</option><option>Lato</option><option>Cedarville Cursive</option><option>Crushed</option><option>Coda</option><option>Kenia</option><option>Josefin Sans</option><option>PT Sans</option><option>OFL Sorts Mill Goudy TT</option><option>Droid Serif</option><option>Podkova</option><option>Sunshiney</option><option>Unkempt</option><option>Kranky</option><option>Mountains of Christmas</option><option>Cuprum</option><option>Neuton</option><option>Cousine</option><option>Cherry Cream Soda</option><option>Orbitron</option><option>Cabin Sketch</option><option>Crafty Girls</option><option>Expletus Sans</option><option>Permanent Marker</option><option>Schoolbell</option><option>Bentham</option><option>Ubuntu</option><option>Merriweather</option><option>Quattrocento</option><option>Terminal Dosis Light</option><option>UnifrakturMaguntia</option><option>Arvo</option><option>Calligraffitti</option><option>Covered By Your Grace</option><option>Luckiest Guy</option><option>Arimo</option><option>Fontdiner Swanky</option><option>Raleway</option><option>Cantarell</option><option>Corben</option><option>Homemade Apple</option><option>Syncopate</option><option>Architects Daughter</option><option>Philosopher</option><option>Astloch</option><option>Coming Soon</option><option>Vollkorn</option><option>Droid Sans Mono</option><option>Copse</option><option>Rock Salt</option><option>Dancing Script</option><option>Tinos</option><option>Walter Turncoat</option><option>Pacifico</option><option>Tangerine</option><option>Wire One</option><option>Goudy Bookletter 1911</option><option>Gruppo</option><option>Play</option><option>Reenie Beanie</option><option>Six Caps</option><option>Sniglet</option><option>Nobile</option><option>Slackey</option><option>MedievalSharp</option><option>Nunito</option><option>Josefin Slab</option><option>Crimson Text</option><option>Yanone Kaffeesatz</option><option>Molengo</option><option>Annie Use Your Telescope</option><option>Neucha</option><option>Inconsolata</option><option>Old Standard TT</option><option>Cardo</option><option>IM Fell</option><option>Geo</option><option>Judson</option><option>Mako</option><option>Miltonian</option><option>Meddon</option><option>The Girl Next Door</option><option>La Belle Aurore</option><option>VT323</option><option>Kristi</option>
+
+</select>
+
+
+</td>
+</tr>
+</table>
+
+
+<table><tr>
+<td valign="top">
+<div id='frame' >
+   <div style='position:relative;width:525px;height:300px'>
+    <canvas id='paper' width="1050" height="600" style="position:absolute;top:0;left:0;width:525px; height:300px" title="Se clicar aqui, irá abrir uma nova página com a versão tamanho 300dpi">
+    </canvas>
+    <canvas id="reflection" style='position:absolute;top:305px;left:0px;width:525px;height:150px;opacity:.25555'></canvas> 
+    <canvas id="reflectionmask" style='position:absolute;top:305px;left:0;width:525px;height:150px'></canvas> 
+   </div>
+</div>
+</td>
+<td valign="top" style="padding:1em">
+<h2>Apply Theme</h2>
+<div class="profile">
+<a href="javascript:" onclick="renderTheme();void(0)" ><img align="top" class="icon" src="./telasocial/bg.png" width="64" /></a> Zorrita de Fuego 2 by <a href="http://creative.mozilla.org/designs/4925">by Aerodi</a>
+</a>
+</td>
+</tr>
+</table>
+
+<div style="margin-bottom:1em">
+<img src="http://www.telasocial.com/output/vendor-taboca/logomini.png" rel="img_src">
+</div>
+
+</center>
+
+
+
+</body>
+</html>
+
